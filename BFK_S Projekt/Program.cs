@@ -10,6 +10,8 @@ namespace BFK_S_Projekt
         {
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+
+            
         }
     }
 }

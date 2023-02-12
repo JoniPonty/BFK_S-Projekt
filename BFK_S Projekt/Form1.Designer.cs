@@ -85,6 +85,9 @@
             // 
             // dgv_spieler
             // 
+            this.dgv_spieler.AllowUserToAddRows = false;
+            this.dgv_spieler.AllowUserToDeleteRows = false;
+            this.dgv_spieler.AllowUserToOrderColumns = true;
             this.dgv_spieler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_spieler.Location = new System.Drawing.Point(130, 70);
             this.dgv_spieler.Name = "dgv_spieler";
@@ -119,6 +122,7 @@
             this.bt_insert_spieler.TabIndex = 2;
             this.bt_insert_spieler.Text = "insert";
             this.bt_insert_spieler.UseVisualStyleBackColor = true;
+            this.bt_insert_spieler.Click += new System.EventHandler(this.bt_insert_spieler_Click);
             // 
             // bt_update_spieler
             // 
@@ -182,6 +186,9 @@
             // 
             // dgv_club
             // 
+            this.dgv_club.AllowUserToAddRows = false;
+            this.dgv_club.AllowUserToDeleteRows = false;
+            this.dgv_club.AllowUserToOrderColumns = true;
             this.dgv_club.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_club.Location = new System.Drawing.Point(130, 70);
             this.dgv_club.Name = "dgv_club";
@@ -231,6 +238,7 @@
             this.bt_insert_trainer.TabIndex = 7;
             this.bt_insert_trainer.Text = "insert";
             this.bt_insert_trainer.UseVisualStyleBackColor = true;
+            this.bt_insert_trainer.Click += new System.EventHandler(this.bt_insert_trainer_Click);
             // 
             // bt_update_trainer
             // 
@@ -243,6 +251,9 @@
             // 
             // dgv_trainer
             // 
+            this.dgv_trainer.AllowUserToAddRows = false;
+            this.dgv_trainer.AllowUserToDeleteRows = false;
+            this.dgv_trainer.AllowUserToOrderColumns = true;
             this.dgv_trainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_trainer.Location = new System.Drawing.Point(130, 70);
             this.dgv_trainer.Name = "dgv_trainer";
@@ -258,7 +269,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ChampionsLeague Database";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

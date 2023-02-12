@@ -11,52 +11,39 @@ namespace BFK_S_Projekt
 {
     public partial class Form1 : Form
     {
-        MySqlConnection conn = new MySqlConnection();
-        MySqlCommand cmd = new MySqlCommand();
-        DataTable dt = new DataTable();
-        MySqlDataAdapter Dta = new MySqlDataAdapter();
-        MySqlDataReader sqlRd;
-
-        DataSet ds = new DataSet();
-
-        String server = "localhost";
-        String username = "root";
-        String database = "championsleague";
+        prop spieler = new prop("Spieler");
+        prop club = new prop("Club");
+        prop trainer = new prop("Trainer");
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void uploadData(string Data, DataGridView dgv)
-        {
-            conn.ConnectionString = "server=" + server + ";" +
-                "username=" + username + ";" + 
-                "database=" + database;
-
-            conn.Open();
-            cmd.Connection = conn;
-            cmd.CommandText = Data;
-            sqlRd = cmd.ExecuteReader();
-            dt.Load(sqlRd);
-            sqlRd.Close();
-            conn.Close();
-            dgv.DataSource = dt;
-            dt = new DataTable();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                uploadData("select * from championsleague.spieler", dgv_spieler);
-                uploadData("select * from championsleague.club", dgv_club);
-                uploadData("select * from championsleague.trainer", dgv_trainer);
+                dgv_spieler.DataSource = spieler.getData();
+                dgv_club.DataSource = club.getData();
+                dgv_trainer.DataSource = trainer.getData();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void bt_insert_spieler_Click(object sender, EventArgs e)
+        {
+            insert_spieler form = new insert_spieler();
+            form.Show();
+        }
+
+        private void bt_insert_trainer_Click(object sender, EventArgs e)
+        {
+            insert_trainer form = new insert_trainer();
+            form.Show();
         }
     }
 }
