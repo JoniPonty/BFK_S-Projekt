@@ -9,18 +9,44 @@ using MySql.Data.MySqlClient;
 
 namespace BFK_S_Projekt
 {
-    public partial class Form1 : Form
+    public partial class default_form : Form
     {
-        prop spieler = new prop("Spieler");
-        prop club = new prop("Club");
-        prop trainer = new prop("Trainer");
+        spieler_class spieler = new spieler_class();
+        club_class club = new club_class();
+        trainer_class trainer = new trainer_class();
 
-        public Form1()
+        public default_form()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_insert_spieler_Click(object sender, EventArgs e)
+        {
+            insert_spieler form = new insert_spieler();
+            form.Show();
+            Refresh();
+        }
+
+        private void bt_insert_trainer_Click(object sender, EventArgs e)
+        {
+            insert_trainer form = new insert_trainer();
+            form.Show();
+            Refresh();
+        }
+
+        private void bt_insert_club_Click(object sender, EventArgs e)
+        {
+            insert_club form = new insert_club();
+            form.Show();
+            Refresh();
+        }
+
+        private void default_form_Activated(object sender, EventArgs e)
         {
             try
             {
@@ -32,24 +58,6 @@ namespace BFK_S_Projekt
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void bt_insert_spieler_Click(object sender, EventArgs e)
-        {
-            insert_spieler form = new insert_spieler();
-            form.Show();
-        }
-
-        private void bt_insert_trainer_Click(object sender, EventArgs e)
-        {
-            insert_trainer form = new insert_trainer();
-            form.Show();
-        }
-
-        private void bt_insert_club_Click(object sender, EventArgs e)
-        {
-            insert_club form = new insert_club();
-            form.Show();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BFK_S_Projekt
 {
     public partial class insert_spieler : Form
     {
-        prop spieler = new prop("Spieler");
+        spieler_class spieler = new spieler_class();
 
         public insert_spieler()
         {
@@ -21,7 +21,7 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            spieler.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', '{cb_sperre.SelectedItem}', '{tb_karten.Text}'");
+            spieler.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', {cb_sperre.SelectedItem}, '{tb_karten.Text}'");
             this.Close();
         }
     }

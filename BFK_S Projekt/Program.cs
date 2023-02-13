@@ -9,7 +9,7 @@ namespace BFK_S_Projekt
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new default_form());
 
             
         }

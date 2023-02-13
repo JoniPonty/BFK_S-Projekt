@@ -10,16 +10,11 @@ using MySql.Data.MySqlClient;
 
 namespace BFK_S_Projekt
 {
-    internal class prop
+    internal class club_class
     {
-        private string type;
         private string server = "localhost";
         private string username = "root";
         private string database = "mydb";
-        public prop(string _type)
-        {
-            this.type = _type;
-        }
 
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand cmd = new MySqlCommand();
@@ -37,7 +32,7 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "select * from mydb." + type.ToLower();
+            cmd.CommandText = "select * from mydb.club";
             sqlRd = cmd.ExecuteReader();
             dt.Load(sqlRd);
             sqlRd.Close();
@@ -46,7 +41,7 @@ namespace BFK_S_Projekt
             dt = new DataTable();
         }
 
-        public string getTrainer()
+        public string[] getTrainer()
         {
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
@@ -56,16 +51,14 @@ namespace BFK_S_Projekt
             cmd.Connection = conn;
             cmd.CommandText = "select trainer_vorname, trainer_nachname from mydb.trainer";
             sqlRd = cmd.ExecuteReader();
-            //string[] trainer = new string[0];
-            string trainer = "dsafkjksdfhaugpsguhgsd";
+            List<string> list = new List<string>();
             while (sqlRd.Read())
             {
-               trainer = sqlRd.GetChar(0) + " " + sqlRd.GetChar(1);
+                list.Add(sqlRd.GetTextReader(0).ReadLine() + " " + sqlRd.GetTextReader(1).ReadLine());
             }
             sqlRd.Close();
             conn.Close();
-            MessageBox.Show(trainer);
-            return trainer;
+            return list.ToArray();
         }
 
         public void setData(string data)
@@ -76,20 +69,30 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            if(type == "Spieler")
-            {
-                cmd.CommandText = $"INSERT INTO `mydb`.`{type}` (`id{type}`, `{type.ToLower()}_vorname`, `{type.ToLower()}_nachname`, `{type.ToLower()}_sperre`, `{type.ToLower()}_karten`) VALUES ({data});";
-            }
-            else if(type == "Trainer")
-            {
-                cmd.CommandText = $"INSERT INTO `mydb`.`{type}` (`id{type}`, `{type.ToLower()}_vorname`, `{type.ToLower()}_nachname`, `{type.ToLower()}_sperre`, `{type.ToLower()}_alter`) VALUES ({data});";
-            }
-            else if(type == "Club")
-            {
-                cmd.CommandText = $"INSERT INTO `mydb`.`{type}` (`id{type}`, `{type.ToLower()}_name`, `Trainer_idTrainer`) VALUES ({data});";
-            }
+            cmd.CommandText = $"INSERT INTO `mydb`.`Club` (`idClub`, `club_name`, `Trainer_idTrainer`) VALUES ({data});";
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public int getId(string name, int times)
+        {
+            int r = 0;
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+
+            conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
+            sqlRd = cmd.ExecuteReader();
+            for(int i = 0; i < times+1; i++)
+            {
+                sqlRd.Read();
+                r = sqlRd.GetInt32(0);
+            }
+            sqlRd.Close();
+            conn.Close();
+            return r;
         }
     }
 }
