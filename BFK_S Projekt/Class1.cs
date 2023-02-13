@@ -46,6 +46,28 @@ namespace BFK_S_Projekt
             dt = new DataTable();
         }
 
+        public string getTrainer()
+        {
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+
+            conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = "select trainer_vorname, trainer_nachname from mydb.trainer";
+            sqlRd = cmd.ExecuteReader();
+            //string[] trainer = new string[0];
+            string trainer = "dsafkjksdfhaugpsguhgsd";
+            while (sqlRd.Read())
+            {
+               trainer = sqlRd.GetChar(0) + " " + sqlRd.GetChar(1);
+            }
+            sqlRd.Close();
+            conn.Close();
+            MessageBox.Show(trainer);
+            return trainer;
+        }
+
         public void setData(string data)
         {
             conn.ConnectionString = "server=" + server + ";" +

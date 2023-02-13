@@ -45,5 +45,11 @@ namespace BFK_S_Projekt
             insert_trainer form = new insert_trainer();
             form.Show();
         }
+
+        private void bt_insert_club_Click(object sender, EventArgs e)
+        {
+            insert_club form = new insert_club();
+            form.Show();
+        }
     }
 }

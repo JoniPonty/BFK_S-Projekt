@@ -10,19 +10,26 @@ using System.Windows.Forms;
 
 namespace BFK_S_Projekt
 {
-    public partial class insert_spieler : Form
+    public partial class insert_club : Form
     {
-        prop spieler = new prop("Spieler");
-
-        public insert_spieler()
+        prop club = new prop("club");
+        public insert_club()
         {
             InitializeComponent();
         }
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            spieler.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', '{cb_sperre.SelectedItem}', '{tb_karten.Text}'");
-            this.Close();
+            
+        }
+
+        private void insert_club_Load(object sender, EventArgs e)
+        {
+            //string[] trainer = club.getTrainer();
+            //foreach (string s in trainer)
+            {
+              //  cb_trainer.Text = s;
+            }
         }
     }
 }
