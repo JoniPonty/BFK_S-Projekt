@@ -20,9 +20,18 @@ namespace BFK_S_Projekt
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void default_form_Activated(object sender, EventArgs e)
         {
-
+            try
+            {
+                dgv_spieler.DataSource = spieler.getData();
+                dgv_club.DataSource = club.getData();
+                dgv_trainer.DataSource = trainer.getData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void bt_insert_spieler_Click(object sender, EventArgs e)
@@ -44,20 +53,6 @@ namespace BFK_S_Projekt
             insert_club form = new insert_club();
             form.Show();
             Refresh();
-        }
-
-        private void default_form_Activated(object sender, EventArgs e)
-        {
-            try
-            {
-                dgv_spieler.DataSource = spieler.getData();
-                dgv_club.DataSource = club.getData();
-                dgv_trainer.DataSource = trainer.getData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }
