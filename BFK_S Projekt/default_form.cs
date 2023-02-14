@@ -37,21 +37,32 @@ namespace BFK_S_Projekt
         {
             insert_spieler form = new insert_spieler();
             form.Show();
-            Refresh();
         }
 
         private void bt_insert_trainer_Click(object sender, EventArgs e)
         {
             insert_trainer form = new insert_trainer();
             form.Show();
-            Refresh();
         }
 
         private void bt_insert_club_Click(object sender, EventArgs e)
         {
             insert_club form = new insert_club();
             form.Show();
-            Refresh();
+        }
+
+        private void bt_update_spieler_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_spieler_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string[] data = new string[3];
+            for (int i = 0; i < 3; i++)
+            {
+                data[i] = dgv_spieler.SelectedRows[0].Cells[i].Value.ToString(); 
+            }
         }
     }
 }

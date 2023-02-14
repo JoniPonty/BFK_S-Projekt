@@ -24,7 +24,7 @@ namespace BFK_S_Projekt
 
         DataSet ds = new DataSet();
 
-        public DataTable getData()
+        public DataTable getDataToDt()
         {
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
@@ -40,17 +40,51 @@ namespace BFK_S_Projekt
             return dt;
             dt = new DataTable();
         }
+
+        public void getDataToTb(string[] data, TextBox[] textBoxes)
+        {
+            for(int i = 0; i < data.Length; i++)
+            {
+                textBoxes[i].Text = data[i];
+            }
+        }
+
         public void setData(string data)
         {
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
+            try
+            {
+                conn.Open();
+                cmd.Connection = conn;
+                cmd.CommandText = $"INSERT INTO `mydb`.`Spieler` (`idSpieler`, `spieler_vorname`, `spieler_nachname`, `spieler_sperre`, `spieler_karten`) VALUES ({data});";
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-            conn.Open();
-            cmd.Connection = conn;
-            cmd.CommandText = $"INSERT INTO `mydb`.`Spieler` (`idSpieler`, `spieler_vorname`, `spieler_nachname`, `spieler_sperre`, `spieler_karten`) VALUES ({data});";
-            cmd.ExecuteNonQuery();
-            conn.Close();
+        public void updateData(string data, int id)
+        {
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+            try
+            {
+                conn.Open();
+                cmd.Connection = conn;
+                cmd.CommandText = $"UPDATE Spieler SET {data} WHERE idSpieler=";
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
