@@ -26,27 +26,27 @@ namespace BFK_S_Projekt
 
         public DataTable getDataToDt()
         {
+            dt = new DataTable();
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "select * from mydb.spieler";
+            cmd.CommandText = "SELECT spieler_vorname, spieler_nachname, spieler_sperre, spieler_karten FROM mydb.spieler";
             sqlRd = cmd.ExecuteReader();
             dt.Load(sqlRd);
             sqlRd.Close();
             conn.Close();
             return dt;
-            dt = new DataTable();
         }
 
-        public void getDataToTb(string[] data, TextBox[] textBoxes)
+        public void transferDataToTb(string[] data, TextBox vorname, TextBox nachname, ComboBox sperre, TextBox karten)
         {
-            for(int i = 0; i < data.Length; i++)
-            {
-                textBoxes[i].Text = data[i];
-            }
+            vorname.Text = data[0];
+            nachname.Text = data[1];
+            sperre.Text = data[2];
+            karten.Text = data[3];
         }
 
         public void setData(string data)
@@ -68,8 +68,9 @@ namespace BFK_S_Projekt
             }
         }
 
-        public void updateData(string data, int id)
+        public void updateData(string data, int index, string name)
         {
+            int id = getId(name, index);
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
@@ -77,7 +78,7 @@ namespace BFK_S_Projekt
             {
                 conn.Open();
                 cmd.Connection = conn;
-                cmd.CommandText = $"UPDATE Spieler SET {data} WHERE idSpieler=";
+                cmd.CommandText = $"UPDATE Spieler SET {data} WHERE idSpieler={id}";
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -85,6 +86,40 @@ namespace BFK_S_Projekt
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void deleteData(string name, int index)
+        {
+            int id = getId(name, index);
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+            conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = $"DELETE FROM Spieler WHERE idSpieler={id}";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public int getId(string name, int times)
+        {
+            int r = 0;
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+
+            conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = $"SELECT idSpieler FROM mydb.spieler WHERE concat(spieler_vorname, ' ', spieler_nachname)='{name}'";
+            sqlRd = cmd.ExecuteReader();
+            for (int i = 0; i < times + 1; i++)
+            {
+                sqlRd.Read();
+                r = sqlRd.GetInt32(0);
+            }
+            sqlRd.Close();
+            conn.Close();
+            return r;
         }
     }
 }

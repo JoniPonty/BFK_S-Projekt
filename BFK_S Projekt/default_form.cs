@@ -23,9 +23,9 @@ namespace BFK_S_Projekt
         {
             try
             {
-                dgv_spieler.DataSource = spieler.getData();
+                dgv_spieler.DataSource = spieler.getDataToDt();
                 dgv_club.DataSource = club.getData();
-                dgv_trainer.DataSource = trainer.getData();
+                dgv_trainer.DataSource = trainer.getDataToDt();
             }
             catch (Exception ex)
             {
@@ -53,15 +53,103 @@ namespace BFK_S_Projekt
 
         private void bt_update_spieler_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string[] data = new string[4];
+                for (int i = 0; i < 4 ; i++)
+                {
+                    data[i] = dgv_spieler.SelectedRows[0].Cells[i].Value.ToString();
+                }
 
+                update_spieler form = new update_spieler(data, dgv_spieler.SelectedRows[0].Index);
+                form.Show();
+            }
+            catch (Exception ex) 
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("You need to select one whole table row");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            
         }
 
-        private void dgv_spieler_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void bt_delete_spieler_Click(object sender, EventArgs e)
         {
-            string[] data = new string[3];
-            for (int i = 0; i < 3; i++)
+            try
             {
-                data[i] = dgv_spieler.SelectedRows[0].Cells[i].Value.ToString(); 
+                string[] data = new string[4];
+                for (int i = 0; i < 3; i++)
+                {
+                    data[i] = dgv_spieler.SelectedRows[0].Cells[i].Value.ToString();
+                }
+                spieler.deleteData(data[0] + ' ' + data[1], dgv_spieler.SelectedRows[0].Index);
+                default_form_Activated(sender, e);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("You need to select one whole table row");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void bt_update_trainer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] data = new string[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    data[i] = dgv_trainer.SelectedRows[0].Cells[i].Value.ToString();
+                }
+
+                update_trainer form = new update_trainer(data, dgv_trainer.SelectedRows[0].Index);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("You need to select one whole table row");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void bt_delete_trainer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] data = new string[4];
+                for (int i = 0; i < 3; i++)
+                {
+                    data[i] = dgv_trainer.SelectedRows[0].Cells[i].Value.ToString();
+                }
+                trainer.deleteData(data[0] + ' ' + data[1], dgv_trainer.SelectedRows[0].Index);
+                default_form_Activated(sender, e);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("You need to select one whole table row");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }
