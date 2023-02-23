@@ -21,8 +21,17 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            spieler.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', {cb_sperre.SelectedItem}, '{tb_karten.Text}'");
+            spieler.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', {cb_sperre.SelectedItem}, '{tb_karten.Text}'", $"{cb_club.SelectedItem}", $"{tb_vorname.Text} {tb_nachname.Text}", cb_club.SelectedIndex);
             this.Close();
+        }
+
+        private void insert_spieler_Load(object sender, EventArgs e)
+        {
+            string[] club = spieler.getClub();
+            foreach (string s in club)
+            {
+                cb_club.Items.Add(s);
+            }
         }
     }
 }

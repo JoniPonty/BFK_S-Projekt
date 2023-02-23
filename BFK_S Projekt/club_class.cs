@@ -26,19 +26,19 @@ namespace BFK_S_Projekt
 
         public DataTable getData()
         {
+            dt = new DataTable();
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "select * from mydb.club";
+            cmd.CommandText = "SELECT club.club_name, CONCAT(trainer.trainer_vorname, ' ',trainer.trainer_nachname) AS Trainer FROM mydb.club INNER JOIN mydb.trainer ON club.Trainer_idTrainer = trainer.idTrainer;";
             sqlRd = cmd.ExecuteReader();
             dt.Load(sqlRd);
             sqlRd.Close();
             conn.Close();
             return dt;
-            dt = new DataTable();
         }
 
         public string[] getTrainer()

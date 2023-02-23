@@ -24,13 +24,19 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            spieler.updateData($"spieler_vorname='{tb_vorname.Text}', spieler_nachname='{tb_nachname.Text}', spieler_sperre={cb_sperre.Text}, spieler_karten='{tb_karten.Text}'", index, data[0] + ' ' + data[1]);
+            spieler.updateData($"spieler_vorname='{tb_vorname.Text}', spieler_nachname='{tb_nachname.Text}', spieler_sperre={cb_sperre.Text}, spieler_karten='{tb_karten.Text}'",cb_club.Text, index, data[0] + ' ' + data[1]);
             this.Close();
         }
 
         private void update_spieler_Load(object sender, EventArgs e)
         {
             spieler.transferDataToTb(data, tb_vorname, tb_nachname, cb_sperre, tb_karten);
+
+            string[] club = spieler.getClub();
+            foreach (string s in club)
+            {
+                cb_club.Items.Add(s);
+            }
         }
     }
 }
