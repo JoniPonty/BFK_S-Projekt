@@ -35,6 +35,7 @@
             this.bt_insert_spieler = new System.Windows.Forms.Button();
             this.bt_update_spieler = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bt_delete_club = new System.Windows.Forms.Button();
             this.bt_insert_club = new System.Windows.Forms.Button();
             this.bt_update_club = new System.Windows.Forms.Button();
             this.dgv_club = new System.Windows.Forms.DataGridView();
@@ -44,7 +45,6 @@
             this.bt_update_trainer = new System.Windows.Forms.Button();
             this.dgv_trainer = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.bt_delete_club = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_spieler)).BeginInit();
@@ -143,6 +143,16 @@
             this.tabPage2.Text = "Club";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // bt_delete_club
+            // 
+            this.bt_delete_club.Location = new System.Drawing.Point(573, 327);
+            this.bt_delete_club.Name = "bt_delete_club";
+            this.bt_delete_club.Size = new System.Drawing.Size(191, 58);
+            this.bt_delete_club.TabIndex = 8;
+            this.bt_delete_club.Text = "delete";
+            this.bt_delete_club.UseVisualStyleBackColor = true;
+            this.bt_delete_club.Click += new System.EventHandler(this.bt_delete_club_Click);
+            // 
             // bt_insert_club
             // 
             this.bt_insert_club.Location = new System.Drawing.Point(312, 327);
@@ -161,6 +171,7 @@
             this.bt_update_club.TabIndex = 6;
             this.bt_update_club.Text = "update";
             this.bt_update_club.UseVisualStyleBackColor = true;
+            this.bt_update_club.Click += new System.EventHandler(this.bt_update_club_Click);
             // 
             // dgv_club
             // 
@@ -238,15 +249,6 @@
             this.dgv_trainer.RowTemplate.Height = 29;
             this.dgv_trainer.Size = new System.Drawing.Size(776, 304);
             this.dgv_trainer.TabIndex = 5;
-            // 
-            // bt_delete_club
-            // 
-            this.bt_delete_club.Location = new System.Drawing.Point(573, 327);
-            this.bt_delete_club.Name = "bt_delete_club";
-            this.bt_delete_club.Size = new System.Drawing.Size(191, 58);
-            this.bt_delete_club.TabIndex = 8;
-            this.bt_delete_club.Text = "delete";
-            this.bt_delete_club.UseVisualStyleBackColor = true;
             // 
             // default_form
             // 

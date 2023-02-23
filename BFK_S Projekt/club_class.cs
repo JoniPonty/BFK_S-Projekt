@@ -74,6 +74,38 @@ namespace BFK_S_Projekt
             conn.Close();
         }
 
+        public void updateData(string dataClub, string dataTrainer, int index, string name)
+        {
+            int id = getId(name, index);
+            conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+            try
+            {
+                conn.Open();
+                cmd.Connection = conn;
+                if (dataClub != "")
+                {
+                    cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{dataClub}'";
+                    sqlRd = cmd.ExecuteReader();
+                    sqlRd.Read();
+                    int clubId = sqlRd.GetInt32(0);
+                    sqlRd.Close();
+                    cmd.CommandText = $"UPDATE Spieler SET {dataTrainer} WHERE idSpieler={id}; UPDATE Club_has_Spieler SET Club_idClub={clubId} WHERE Spieler_idSpieler={id}";
+                }
+                else
+                {
+                    cmd.CommandText = $"UPDATE Spieler SET {dataTrainer} WHERE idSpieler={id}";
+                }
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public int getId(string name, int times)
         {
             int r = 0;

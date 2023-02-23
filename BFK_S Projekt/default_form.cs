@@ -152,5 +152,33 @@ namespace BFK_S_Projekt
                 }
             }
         }
+
+        private void bt_update_club_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string data = dgv_trainer.SelectedRows[0].Cells[0].Value.ToString();
+
+                update_club form = new update_club(data);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("Select the entire row you want to edit");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void bt_delete_club_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
