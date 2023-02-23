@@ -94,7 +94,7 @@ namespace BFK_S_Projekt
             {
                 if (ex.Message.Contains("Index was out of range"))
                 {
-                    MessageBox.Show("You need to select one whole table row");
+                    MessageBox.Show("Select the entire row you want to edit");
                 }
                 else
                 {
@@ -119,7 +119,7 @@ namespace BFK_S_Projekt
             {
                 if (ex.Message.Contains("Index was out of range"))
                 {
-                    MessageBox.Show("You need to select one whole table row");
+                    MessageBox.Show("Select the entire row you want to edit");
                 }
                 else
                 {
@@ -144,7 +144,7 @@ namespace BFK_S_Projekt
             {
                 if (ex.Message.Contains("Index was out of range"))
                 {
-                    MessageBox.Show("You need to select one whole table row");
+                    MessageBox.Show("Select the entire row you want to edit");
                 }
                 else
                 {
