@@ -78,6 +78,7 @@ namespace BFK_S_Projekt
             }
             catch (Exception ex)
             {
+                conn.Close();
                 MessageBox.Show(ex.Message);
             }
         }

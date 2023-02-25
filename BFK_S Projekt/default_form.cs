@@ -157,10 +157,12 @@ namespace BFK_S_Projekt
         {
             try
             {
-
-                string data = dgv_trainer.SelectedRows[0].Cells[0].Value.ToString();
-
-                update_club form = new update_club(data);
+                string[] data = new string[2];
+                for (int i = 0; i < 2; i++)
+                {
+                    data[i] = dgv_club.SelectedRows[0].Cells[i].Value.ToString();
+                }
+                update_club form = new update_club(data, dgv_club.SelectedRows[0].Index);
                 form.Show();
             }
             catch (Exception ex)
@@ -178,7 +180,27 @@ namespace BFK_S_Projekt
 
         private void bt_delete_club_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                string[] data = new string[2];
+                for (int i = 0; i < 2; i++)
+                {
+                    data[i] = dgv_club.SelectedRows[0].Cells[i].Value.ToString();
+                }
+                club.deleteData(data[0], dgv_club.SelectedRows[0].Index);
+                default_form_Activated(sender, e);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Index was out of range"))
+                {
+                    MessageBox.Show("Select the entire row you want to edit");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

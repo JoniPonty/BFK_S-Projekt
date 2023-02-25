@@ -20,7 +20,7 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            club.setData($"NULL, '{tb_name.Text}', {club.getId(cb_trainer.SelectedItem.ToString(), cb_trainer.SelectedIndex)}");
+            club.setData($"NULL, '{tb_name.Text}', {club.getTrainerId(cb_trainer.SelectedItem.ToString(), cb_trainer.SelectedIndex)}");
             this.Close();
         }
 

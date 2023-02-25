@@ -89,6 +89,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_name);
             this.Name = "update_club";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "update_club";
             this.Load += new System.EventHandler(this.update_club_Load);
             this.ResumeLayout(false);

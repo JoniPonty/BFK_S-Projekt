@@ -74,9 +74,8 @@ namespace BFK_S_Projekt
             conn.Close();
         }
 
-        public void updateData(string dataClub, string dataTrainer, int index, string name)
+        public void updateData(string dataClub, string dataTrainer, int indexNew, int indexOld, string trainerName, string clubName)
         {
-            int id = getId(name, index);
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
@@ -84,37 +83,45 @@ namespace BFK_S_Projekt
             {
                 conn.Open();
                 cmd.Connection = conn;
-                if (dataClub != "")
+                int clubId = getClubId(clubName, indexOld);
+                if (dataTrainer != "")
                 {
-                    cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{dataClub}'";
-                    sqlRd = cmd.ExecuteReader();
-                    sqlRd.Read();
-                    int clubId = sqlRd.GetInt32(0);
-                    sqlRd.Close();
-                    cmd.CommandText = $"UPDATE Spieler SET {dataTrainer} WHERE idSpieler={id}; UPDATE Club_has_Spieler SET Club_idClub={clubId} WHERE Spieler_idSpieler={id}";
+                    int idNew = getTrainerId(dataTrainer, indexNew);
+                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idNew}' WHERE idClub={clubId}";
                 }
-                else
+                else 
                 {
-                    cmd.CommandText = $"UPDATE Spieler SET {dataTrainer} WHERE idSpieler={id}";
+                    int idOld = getTrainerId(trainerName, indexOld);
+                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idOld}' WHERE idClub={clubId}";
                 }
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
             catch (Exception ex)
             {
+                conn.Close();
                 MessageBox.Show(ex.Message);
             }
         }
 
-        public int getId(string name, int times)
+        public void deleteData(string name, int index)
         {
-            int r = 0;
             conn.ConnectionString = "server=" + server + ";" +
                 "username=" + username + ";" +
                 "database=" + database;
-
             conn.Open();
             cmd.Connection = conn;
+            int id = getClubId(name, index);
+            cmd.CommandText = $"DELETE FROM club_has_spieler WHERE Club_idClub={id}";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = $"DELETE FROM Club WHERE idClub={id}";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public int getTrainerId(string name, int times)
+        {
+            int r = 0;
             cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
             sqlRd = cmd.ExecuteReader();
             for(int i = 0; i < times+1; i++)
@@ -123,7 +130,20 @@ namespace BFK_S_Projekt
                 r = sqlRd.GetInt32(0);
             }
             sqlRd.Close();
-            conn.Close();
+            return r;
+        }
+
+        public int getClubId(string name, int times)
+        {
+            int r = 0;
+            cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{name}'";
+            sqlRd = cmd.ExecuteReader();
+            for (int i = 0; i < times + 1; i++)
+            {
+                sqlRd.Read();
+                r = sqlRd.GetInt32(0);
+            }
+            sqlRd.Close();
             return r;
         }
     }
