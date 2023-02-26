@@ -12,10 +12,13 @@ namespace BFK_S_Projekt
 {
     internal class spieler_class
     {
+
+        //Variablen für connection string werden global gesetzt
         private string server = "localhost";
         private string username = "root";
         private string database = "mydb";
 
+        //Klassen für SQL Verbindung werden gesetzt
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand cmd = new MySqlCommand();
         DataTable dt = new DataTable();
@@ -24,6 +27,7 @@ namespace BFK_S_Projekt
 
         DataSet ds = new DataSet();
 
+        //Daten werden in die DataGridView geladen
         public DataTable getDataToDt()
         {
             dt = new DataTable();
@@ -41,6 +45,7 @@ namespace BFK_S_Projekt
             return dt;
         }
 
+        //Daten werden an insert_spieler.cs Textboxen/comboboxen verteilt
         public void transferDataToTb(string[] data, TextBox vorname, TextBox nachname, ComboBox sperre, TextBox karten)
         {
             vorname.Text = data[0];
@@ -49,6 +54,7 @@ namespace BFK_S_Projekt
             karten.Text = data[3];
         }
 
+        //Hiermit wird ein neuer spieler auf dem MySql Server erstellt
         public void setData(string spielerData, string clubData, string name, int times)
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -79,6 +85,7 @@ namespace BFK_S_Projekt
             }
         }
 
+        //Updatet bisherigen spieler
         public void updateData(string dataSpieler, string dataClub, int index, string name)
         {
             int id = getId(name, index);
@@ -112,6 +119,7 @@ namespace BFK_S_Projekt
             }
         }
 
+        //Löscht spieler
         public void deleteData(string name, int index)
         {
             int id = getId(name, index);
@@ -127,6 +135,7 @@ namespace BFK_S_Projekt
             conn.Close();
         }
 
+        //Id für bestimmten Spieler namen wird abgefragt. Wird benötigt um spieler zu Updaten und zu löschen.
         public int getId(string name, int times)
         {
             int r = 0;
@@ -148,6 +157,7 @@ namespace BFK_S_Projekt
             return r;
         }
 
+        //Clubname wird abgefragt
         public string[] getClub()
         {
             conn.ConnectionString = "server=" + server + ";" +

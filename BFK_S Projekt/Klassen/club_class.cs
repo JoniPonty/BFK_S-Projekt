@@ -122,14 +122,34 @@ namespace BFK_S_Projekt
         public int getTrainerId(string name, int times)
         {
             int r = 0;
-            cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
-            sqlRd = cmd.ExecuteReader();
-            for(int i = 0; i < times+1; i++)
+            if (conn.State.ToString() == "Open")
             {
-                sqlRd.Read();
-                r = sqlRd.GetInt32(0);
+                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
+                sqlRd = cmd.ExecuteReader();
+                for (int i = 0; i < times + 1; i++)
+                {
+                    sqlRd.Read();
+                    r = sqlRd.GetInt32(0);
+                }
+                sqlRd.Close();
             }
-            sqlRd.Close();
+            else
+            {
+                conn.ConnectionString = "server=" + server + ";" +
+                "username=" + username + ";" +
+                "database=" + database;
+                conn.Open();
+                cmd.Connection = conn;
+                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
+                sqlRd = cmd.ExecuteReader();
+                for (int i = 0; i < times + 1; i++)
+                {
+                    sqlRd.Read();
+                    r = sqlRd.GetInt32(0);
+                }
+                sqlRd.Close();
+                conn.Close();
+            }
             return r;
         }
 
