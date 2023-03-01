@@ -12,7 +12,9 @@ namespace BFK_S_Projekt
 {
     public partial class update_spieler : Form
     {
+        //Initialisierung der Klasse
         spieler_class spieler = new spieler_class();
+        //Definierung der Globalen Variablen
         private string[] data;
         private int index;
         public update_spieler(string[] _data, int _index)
@@ -24,6 +26,7 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
+            //Update der Daten durch die methode
             spieler.updateData($"spieler_vorname='{tb_vorname.Text}', spieler_nachname='{tb_nachname.Text}', spieler_sperre={cb_sperre.Text}, spieler_karten='{tb_karten.Text}'",cb_club.Text, index, data[0] + ' ' + data[1]);
             this.Close();
         }

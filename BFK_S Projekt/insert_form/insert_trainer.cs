@@ -12,6 +12,7 @@ namespace BFK_S_Projekt
 {
     public partial class insert_trainer : Form
     {
+        //Initialisierung der Klasse
         trainer_class trainer = new trainer_class();
 
         public insert_trainer()
@@ -21,9 +22,15 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            trainer.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', {cb_sperre.SelectedItem}, '{tb_alter.Text}'");
-            this.Close();
-            
+            //Setzen der Daten durch die methode
+            try
+            {
+                trainer.setData($"NULL, '{tb_vorname.Text}', '{tb_nachname.Text}', {cb_sperre.SelectedItem}, '{tb_alter.Text}'");
+                this.Close();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }  
         }
     }
 }

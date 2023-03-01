@@ -12,6 +12,7 @@ namespace BFK_S_Projekt
 {
     public partial class insert_club : Form
     {
+        //Initialisierung der Klasse
         club_class club = new club_class();
         public insert_club()
         {
@@ -20,12 +21,21 @@ namespace BFK_S_Projekt
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            club.setData($"NULL, '{tb_name.Text}', {club.getTrainerId(cb_trainer.SelectedItem.ToString(), cb_trainer.SelectedIndex)}");
-            this.Close();
+            //Setzen der Daten durch die methode
+            try
+            {
+                club.setData($"NULL, '{tb_name.Text}', {club.getTrainerId(cb_trainer.SelectedItem.ToString(), cb_trainer.SelectedIndex)}");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void insert_club_Load(object sender, EventArgs e)
         {
+            //Alle Daten werden in die Form geladen
             string[] trainer = club.getTrainer();
             foreach (string s in trainer)
             {

@@ -37,7 +37,7 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "SELECT spieler.spieler_vorname, spieler.spieler_nachname, spieler.spieler_sperre, spieler.spieler_karten, club.club_name FROM mydb.spieler  INNER JOIN mydb.club_has_spieler  ON spieler.idSpieler=club_has_spieler.Spieler_idSpieler INNER JOIN mydb.club ON club_has_spieler.club_idClub = club.idClub";
+            cmd.CommandText = "SELECT spieler.spieler_vorname, spieler.spieler_nachname, spieler.spieler_sperre, spieler.spieler_karten, club.club_name FROM mydb.spieler  INNER JOIN mydb.club_has_spieler  ON spieler.idSpieler=club_has_spieler.Spieler_idSpieler INNER JOIN mydb.club ON club_has_spieler.club_idClub = club.idClub;";
             sqlRd = cmd.ExecuteReader();
             dt.Load(sqlRd);
             sqlRd.Close();
@@ -54,7 +54,7 @@ namespace BFK_S_Projekt
             karten.Text = data[3];
         }
 
-        //Hiermit wird ein neuer spieler auf dem MySql Server erstellt
+        //Hiermit wird ein neuer Spieler auf dem MySql Server erstellt
         public void setData(string spielerData, string clubData, string name, int times)
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -70,7 +70,7 @@ namespace BFK_S_Projekt
 
                 int id = getId(name, times);
                 conn.Open();
-                cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{clubData}'";
+                cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{clubData}';";
                 sqlRd = cmd.ExecuteReader();
                 sqlRd.Read();
                 int clubId = sqlRd.GetInt32(0);
@@ -98,16 +98,16 @@ namespace BFK_S_Projekt
                 cmd.Connection = conn;
                 if(dataClub != "")
                 {
-                    cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{dataClub}'";
+                    cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{dataClub}';";
                     sqlRd = cmd.ExecuteReader();
                     sqlRd.Read();
                     int clubId = sqlRd.GetInt32(0);
                     sqlRd.Close();
-                    cmd.CommandText = $"UPDATE Spieler SET {dataSpieler} WHERE idSpieler={id}; UPDATE Club_has_Spieler SET Club_idClub={clubId} WHERE Spieler_idSpieler={id}";
+                    cmd.CommandText = $"UPDATE Spieler SET {dataSpieler} WHERE idSpieler={id}; UPDATE Club_has_Spieler SET Club_idClub={clubId} WHERE Spieler_idSpieler={id};";
                 }
                 else
                 {
-                    cmd.CommandText = $"UPDATE Spieler SET {dataSpieler} WHERE idSpieler={id}";
+                    cmd.CommandText = $"UPDATE Spieler SET {dataSpieler} WHERE idSpieler={id};";
                 }
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -128,9 +128,9 @@ namespace BFK_S_Projekt
                 "database=" + database;
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = $"DELETE FROM club_has_spieler WHERE Spieler_idSpieler={id}";
+            cmd.CommandText = $"DELETE FROM club_has_spieler WHERE Spieler_idSpieler={id};";
             cmd.ExecuteNonQuery();
-            cmd.CommandText = $"DELETE FROM Spieler WHERE idSpieler={id}";
+            cmd.CommandText = $"DELETE FROM Spieler WHERE idSpieler={id};";
             cmd.ExecuteNonQuery();
             conn.Close();
         }
@@ -145,7 +145,7 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = $"SELECT idSpieler FROM mydb.spieler WHERE concat(spieler_vorname, ' ', spieler_nachname)='{name}'";
+            cmd.CommandText = $"SELECT idSpieler FROM mydb.spieler WHERE concat(spieler_vorname, ' ', spieler_nachname)='{name}';";
             sqlRd = cmd.ExecuteReader();
             for (int i = 0; i < times + 1; i++)
             {
@@ -166,7 +166,7 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "select club_name from mydb.club";
+            cmd.CommandText = "SELECT club_name FROM mydb.club;";
             sqlRd = cmd.ExecuteReader();
             List<string> list = new List<string>();
             while (sqlRd.Read())

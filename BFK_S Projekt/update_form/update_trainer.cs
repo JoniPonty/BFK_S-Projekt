@@ -12,7 +12,9 @@ namespace BFK_S_Projekt
 {
     public partial class update_trainer : Form
     {
+        //Initialisierung der Klasse
         trainer_class trainer = new trainer_class();
+        //Definierung der Globalen Variablen
         private string[] data;
         private int index;
 
@@ -25,11 +27,13 @@ namespace BFK_S_Projekt
 
         private void update_trainer_Load(object sender, EventArgs e)
         {
+            //Daten werden in Form geladen
             trainer.transferDataToTb(data, tb_vorname, tb_nachname, cb_sperre, tb_alter);
         }
 
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
+            //Update der Daten durch die methode
             trainer.updateData($"trainer_vorname='{tb_vorname.Text}', trainer_nachname='{tb_nachname.Text}', trainer_sperre={cb_sperre.Text}, trainer_alter='{tb_alter.Text}'", index, data[0] + ' ' + data[1]);
             this.Close();
         }

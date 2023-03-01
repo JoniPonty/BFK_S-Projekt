@@ -12,10 +12,12 @@ namespace BFK_S_Projekt
 {
     internal class club_class
     {
+        //Variablen für connection string werden global gesetzt
         private string server = "localhost";
         private string username = "root";
         private string database = "mydb";
 
+        //Klassen für SQL Verbindung werden gesetzt
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand cmd = new MySqlCommand();
         DataTable dt = new DataTable();
@@ -24,6 +26,7 @@ namespace BFK_S_Projekt
 
         DataSet ds = new DataSet();
 
+        //Daten werden in die DataGridView geladen
         public DataTable getData()
         {
             dt = new DataTable();
@@ -41,6 +44,7 @@ namespace BFK_S_Projekt
             return dt;
         }
 
+        //Returnt einen Array mit allen Trainern
         public string[] getTrainer()
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -49,7 +53,7 @@ namespace BFK_S_Projekt
 
             conn.Open();
             cmd.Connection = conn;
-            cmd.CommandText = "select trainer_vorname, trainer_nachname from mydb.trainer";
+            cmd.CommandText = "SELECT trainer_vorname, trainer_nachname FROM mydb.trainer";
             sqlRd = cmd.ExecuteReader();
             List<string> list = new List<string>();
             while (sqlRd.Read())
@@ -61,6 +65,7 @@ namespace BFK_S_Projekt
             return list.ToArray();
         }
 
+        //Setzt einen neuen Club in der Datenbank
         public void setData(string data)
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -74,6 +79,7 @@ namespace BFK_S_Projekt
             conn.Close();
         }
 
+        //Updatet Daten in der Datenbank
         public void updateData(string dataClub, string dataTrainer, int indexNew, int indexOld, string trainerName, string clubName)
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -87,12 +93,12 @@ namespace BFK_S_Projekt
                 if (dataTrainer != "")
                 {
                     int idNew = getTrainerId(dataTrainer, indexNew);
-                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idNew}' WHERE idClub={clubId}";
+                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idNew}' WHERE idClub={clubId};";
                 }
                 else 
                 {
                     int idOld = getTrainerId(trainerName, indexOld);
-                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idOld}' WHERE idClub={clubId}";
+                    cmd.CommandText = $"UPDATE Club SET {dataClub}, Trainer_idTrainer='{idOld}' WHERE idClub={clubId};";
                 }
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -104,6 +110,7 @@ namespace BFK_S_Projekt
             }
         }
 
+        //Löscht Daten aus der Datenbank
         public void deleteData(string name, int index)
         {
             conn.ConnectionString = "server=" + server + ";" +
@@ -112,19 +119,20 @@ namespace BFK_S_Projekt
             conn.Open();
             cmd.Connection = conn;
             int id = getClubId(name, index);
-            cmd.CommandText = $"DELETE FROM club_has_spieler WHERE Club_idClub={id}";
+            cmd.CommandText = $"DELETE FROM club_has_spieler WHERE Club_idClub={id};";
             cmd.ExecuteNonQuery();
-            cmd.CommandText = $"DELETE FROM Club WHERE idClub={id}";
+            cmd.CommandText = $"DELETE FROM Club WHERE idClub={id};";
             cmd.ExecuteNonQuery();
             conn.Close();
         }
 
+        //Returnt die Trainer Id
         public int getTrainerId(string name, int times)
         {
             int r = 0;
             if (conn.State.ToString() == "Open")
             {
-                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
+                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}';";
                 sqlRd = cmd.ExecuteReader();
                 for (int i = 0; i < times + 1; i++)
                 {
@@ -140,7 +148,7 @@ namespace BFK_S_Projekt
                 "database=" + database;
                 conn.Open();
                 cmd.Connection = conn;
-                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}'";
+                cmd.CommandText = $"SELECT idTrainer FROM mydb.trainer WHERE concat(trainer_vorname, ' ', trainer_nachname)='{name}';";
                 sqlRd = cmd.ExecuteReader();
                 for (int i = 0; i < times + 1; i++)
                 {
@@ -153,10 +161,11 @@ namespace BFK_S_Projekt
             return r;
         }
 
+        //Returnt die Club Id
         public int getClubId(string name, int times)
         {
             int r = 0;
-            cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{name}'";
+            cmd.CommandText = $"SELECT idClub FROM mydb.club WHERE club_name='{name}';";
             sqlRd = cmd.ExecuteReader();
             for (int i = 0; i < times + 1; i++)
             {
