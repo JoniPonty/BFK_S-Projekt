@@ -2,7 +2,7 @@
 
 - In [db_model](https://github.com/JoniPonty/BFK_S-Projekt/blob/master/db_model/championsleague.mwb) findet man das Datenbank model dieses muss auf einen MySql Server geforwarded werden ([Anleitung](https://www.youtube.com/watch?v=gEuFBDHnz1w) ab Minute 3:39).
 
-- Ich habe hierbei [XAMP](https://www.apachefriends.org/download.html) als MySql Server benutzt. 
+- Ich habe hierbei [XAMPP Control Panel](https://www.apachefriends.org/download.html) als MySql Server benutzt. 
 
 - Der Server muss ohne Passwort und auf den localhost konfiguriert sein (Sonst muss der Code dafür angepasst werden).
 
