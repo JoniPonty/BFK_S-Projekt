@@ -76,7 +76,7 @@
 
   - SELECT `idSpieler` FROM `mydb`.`spieler` WHERE concat(`spieler_vorname`, ' ', `spieler_nachname`)='{`name`}';
 
-  - SELECT club_name FROM mydb.club;
+  - SELECT `club_name` FROM `mydb`.`club`;
 
 
 - Insert Into
@@ -86,7 +86,7 @@
 - Update Befehl
   - UPDATE `Spieler` SET {`dataSpieler`} WHERE `idSpieler`={`id`}; UPDATE `Club_has_Spieler` SET `Club_idClub`={`clubId`} WHERE `Spieler_idSpieler`={`id`};
 
-  - UPDATE `Spieler` SET {dataSpieler} WHERE `idSpieler`={`id`};
+  - UPDATE `Spieler` SET {`dataSpieler`} WHERE `idSpieler`={`id`};
 
 
 - Delete Befehl
