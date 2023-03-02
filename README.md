@@ -2,15 +2,15 @@
 
 - In [db_model](https://github.com/JoniPonty/BFK_S-Projekt/blob/master/db_model/championsleague.mwb) findet man das Datenbank model dieses muss auf einen MySql Server geforwarded werden ([Anleitung](https://www.youtube.com/watch?v=gEuFBDHnz1w) ab Minute 3:39).
 
-- Ich habe hierbei XAMP als MySql Server benutzt. 
+- Ich habe hierbei [XAMP](https://www.apachefriends.org/download.html) als MySql Server benutzt. 
 
 - Der Server muss ohne Passwort und auf den localhost konfiguriert sein (Sonst muss der Code dafür angepasst werden).
 
-- Das Forwarden hat bei der Version 5.2 der Workbench Funktioniert. Bei der Version 8.0 nicht mehr. Sonst wurde es bei keiner anderen Version getestet.
+- Das Forwarden hat bei der Version 5.2.47 der [Workbench](https://downloads.mysql.com/archives/workbench/) Funktioniert. Bei der Version 8.0 nicht mehr. Sonst wurde es bei keiner anderen Version getestet.
 
-- Das Projekt wurde auf der .net 6.0 Version aufgebaut und mit Visual Studio 2022 Programmiert.
+- Das Projekt wurde auf der [.net 6.0 Version](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) aufgebaut und mit [Visual Studio 2022](https://visualstudio.microsoft.com/de/vs/) Programmiert.
 
-- Als Nuget Paket wird nur MySql.Data auf der Version (8.0.32) Benutzt
+- Als Nuget Paket wird nur [MySql.Data](https://www.nuget.org/packages/MySql.Data/) auf der (Version 8.0.32) Benutzt
 
 
 
