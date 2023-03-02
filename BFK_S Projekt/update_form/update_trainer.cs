@@ -14,6 +14,7 @@ namespace BFK_S_Projekt
     {
         //Initialisierung der Klasse
         trainer_class trainer = new trainer_class();
+
         //Definierung der Globalen Variablen
         private string[] data;
         private int index;

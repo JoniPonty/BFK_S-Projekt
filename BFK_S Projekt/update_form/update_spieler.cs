@@ -14,6 +14,7 @@ namespace BFK_S_Projekt
     {
         //Initialisierung der Klasse
         spieler_class spieler = new spieler_class();
+
         //Definierung der Globalen Variablen
         private string[] data;
         private int index;

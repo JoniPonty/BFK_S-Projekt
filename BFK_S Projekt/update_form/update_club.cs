@@ -14,6 +14,7 @@ namespace BFK_S_Projekt
     {   
         //Initialisierung der Klasse
         club_class club = new club_class();
+
         //Definierung der Globalen Variablen
         private string[] data;
         private int index;
