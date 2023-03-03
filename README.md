@@ -24,7 +24,7 @@
 
   - SELECT `trainer_vorname`, `trainer_nachname` FROM `mydb`.`trainer`;
 
-  - SELECT `idTrainer` FROM `mydb`.`trainer` WHERE concat(`trainer_vorname`, ' ', `trainer_nachname`)='{`name`}'
+  - SELECT `idTrainer` FROM `mydb`.`trainer` WHERE CONCAT(`trainer_vorname`, ' ', `trainer_nachname`)='{`name`}'
 
   - SELECT `idClub` FROM `mydb`.`club` WHERE `club_name`='{`name`}';
 
@@ -51,7 +51,7 @@
 - Select Befehl
   - SELECT `trainer_vorname`, `trainer_nachname`, `trainer_sperre`, `trainer_alter` FROM `mydb`.`trainer`;
 
-  - SELECT `idTrainer` FROM `mydb`.`trainer` WHERE concat(`trainer_vorname`, ' ', `trainer_nachname`)='{`name`}';
+  - SELECT `idTrainer` FROM `mydb`.`trainer` WHERE CONCAT(`trainer_vorname`, ' ', `trainer_nachname`)='{`name`}';
 
 
 - Insert Into
